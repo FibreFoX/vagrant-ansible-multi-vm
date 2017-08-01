@@ -1,0 +1,13 @@
+---
+- name: install essentials
+  apt: name={{item}}
+  with_items:
+    - vim
+    - sudo
+    - screen
+    - cronolog
+    - apt-transport-https
+    - zip
+    - unzip
+    - locate
+    - net-tools
