@@ -27,6 +27,10 @@ Vagrant.configure("2") do |config|
 
         vmConfig.vm.network "private_network", ip: "192.168.100.100", virtualbox__intnet: "development_network"
         vmConfig.vm.network "forwarded_port", guest: 80, host: 8080
+        
+        # instead of single port forwarding, you can add some host-only adapter
+        # this makes the VM available at 172.28.128.3 (may be different, but it seems to be the default)
+        # vmConfig.vm.network "private_network", type: "dhcp"
 
         vmConfig.vm.provider "virtualbox" do |vb|
             # vb.memory = "8192"
@@ -62,7 +66,8 @@ Vagrant.configure("2") do |config|
             ansible.verbose = true
             ansible.limit = "development-vm"
             ansible.install_mode = :pip
-            ansible.sudo = true
+            # this is not needed, connection is set to ROOT via inventory-file
+            # ansible.sudo = true
         end
     end
 
